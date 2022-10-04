@@ -1,4 +1,4 @@
-# Grupo de estudo Coq
+# Grupo de estudos Coq
 
 O sistema do Coq oferece uma linguagem na qual se pode definir objetos matemáticos e provar propriedades acerca deles. Neste repositório, manteremos documentos e links úteis.
 
