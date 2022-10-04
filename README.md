@@ -5,4 +5,4 @@ O sistema do Coq oferece uma linguagem na qual se pode definir objetos matemáti
 * Versão mais recente do programa (Windows, Linux e Mac): https://github.com/coq/platform/releases/tag/2022.04.1
 * Coq no browser: https://coq.vercel.app/ 
 * Software Foundations: https://softwarefoundations.cis.upenn.edu/
-* Coq in a Hurry: [coq-hurry.pdf]
+* Coq in a Hurry: [Coq in a Hurry](coq-hurry.pdf)
