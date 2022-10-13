@@ -1,7 +1,5 @@
 (** A diretriz Check **)
 
-Set Printing Parentheses.
-
 Theorem or_left: forall P Q : Prop, P -> P \/ Q.
 Proof.
   intros. left. apply H.
