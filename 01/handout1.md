@@ -162,7 +162,7 @@ a -> b -> c
 a -> (b -> c)
 ```
 
-Portanto, para uma função f : nat -> nat -> nat -> nat
+Portanto, para uma função f : nat -> nat -> nat -> nat [i.e, f : nat -> (nat -> (nat -> nat))]
 
 ```coq
 fun a b c => a + b + c
