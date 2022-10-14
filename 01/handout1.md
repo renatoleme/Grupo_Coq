@@ -1,39 +1,49 @@
 # Coq
 
-Uma linguagem para
+O sistema do Coq oferece uma linguagem para
 
-1) Lidar com formulas.
+1) Lidar com fórmulas.
 2) Checar se uma fórmula é bem-formada.
 3) Provar.
 
-Exemplo:
+**Exemplo**
 
-Queremos definir o tipo dos números naturais.
+Queremos definir a fórmula dos números naturais.
 
+```
 0, 1, 2, 3 ...
+```
 
 ## Linguagem semi-formalizada
 
-Um número natural X é um objeto do tipo N, onde
+Um número natural **n** é um objeto do tipo N 
 
-N : Tipo
 
-X ou é 0
-ou é succ (m : N)
-
+```
+(1) igual a 0; ou
+(2) igual a succ (m do tipo N)
+```
 onde succ é uma função N -> N
 
-0 = 0
-1 = succ 0
-2 = succ (succ 0)
-3 = succ (succ (succ 0))
-...
++ 0 = 0
++ 1 = succ 0
++ 2 = succ (succ 0)
++ 3 = succ (succ (succ 0))
++ ...
 
 ## Linguagem formalizada
 
+```coq
 Inductive nat : Type :=
 | O
 | S (n : nat).
+```
+
++ 0 = O
++ 1 = S O
++ 2 = S (S O)
++ 3 = S (S (S O))
++ ...
 
 # Check
 
