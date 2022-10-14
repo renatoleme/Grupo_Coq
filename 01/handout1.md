@@ -148,4 +148,37 @@ fun n => let d := (fun m => m * 2) in d n * n
 
 Notações *overloaded*: algumas notações possuem aplicações diferentes em contextos distintos. Exemplo, *X * Y* representa a multiplicação se *X, Y : nat*, mas significa produto cartesiano se *X, Y : Type*. Para saber quais são os contextos de uma notação, use *Locate*.
 
-     
+### Associatividade
+
+A regra de associatividade para o parênteses com relação ao operador -> é à direita. Ou seja,
+
+```coq
+a -> b -> c
+```
+
+É o mesmo que
+
+```coq
+a -> (b -> c)
+```
+
+Portanto, para uma função f : nat -> nat -> nat -> nat
+
+```coq
+fun a b c => a + b + c
+```
+
+O seguinte é verdadeiro
+
+```coq
+f 2 3 4 = ((f 2) 3) 4
+```
+
+## Compute
+
+Além de definir e demonstrar propriedades acerca de funções, podemos estar interessados em sua efetiva computação. Quando esse é o caso, usamos a diretriz *Compute*. Exemplo:
+
+```coq
+Compute (fun n => n * n) 5.
+```
+
