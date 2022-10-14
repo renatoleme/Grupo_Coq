@@ -107,7 +107,7 @@ Exemplo de fórmula do tipo nat $\rightarrow$ Prop. Note que *fun* aqui opera co
 
 ```coq
 fun (n : nat) => n = n
-     : nat -> Propss
+     : nat -> Prop
 ```
 
 A notação **A : B** pode significar que a expressão **A** tem o tipo **B** ou que **A** é uma prova de **B**.
@@ -126,7 +126,7 @@ fun x : nat => x = 3
      : nat -> Prop
 ```
 
-A próximo fórmula composta é uma proposição (*Prop*) que, em linguagem semi-formalizada, diz: "Para todo número natural x, x é menor que 3 ou existe um número natura x tal que y é igual a y + 3".
+A próximo fórmula composta é uma proposição (*Prop*) que, em linguagem semi-formalizada, diz: "Para todo número natural x, x é menor que 3 ou existe um número natural y tal que x é igual a y + 3".
 
 ```coq
 Check (forall x:nat, x < 3 \/ (exists y:nat, x = y + 3)).
