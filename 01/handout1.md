@@ -16,14 +16,14 @@ Queremos definir a fórmula dos números naturais.
 
 ## Linguagem semi-formalizada
 
-Um número natural **n** é um objeto do tipo N 
+Um número natural **n** é um objeto do tipo N tal que
 
 
 ```
-(1) igual a 0; ou
-(2) igual a succ (m do tipo N)
+(1) n é igual a 0; ou
+(2) n é igual a succ (m do tipo N)
 ```
-onde succ é uma função N -> N
+onde **succ** é uma função N $\rightarrow$ N
 
 + 0 = 0
 + 1 = succ 0
@@ -33,11 +33,15 @@ onde succ é uma função N -> N
 
 ## Linguagem formalizada
 
+O nome da linguagem do Coq é... [Gallina](https://coq.github.io/doc/v8.9/refman/language/gallina-specification-language.html). Nessa linguagem, podemos redefinir o tipo acima da seguinte maneira.
+
 ```coq
 Inductive nat : Type :=
 | O
 | S (n : nat).
 ```
+
+E os números então se tornam
 
 + 0 = O
 + 1 = S O
@@ -45,27 +49,67 @@ Inductive nat : Type :=
 + 3 = S (S (S O))
 + ...
 
+Uma das vantagens em definir o tipo em uma linguagem formalizada é que podemos checar, programaticamente, se uma fórmula é bem formada.
+
 # Check
 
-Propósito: checa se uma fórmula é bem formada.
+**Propósito:** checar se uma fórmula é bem formada.
 
-O comando "Check X" verifica se a fórmula X é bem formada.
+1. **O** é bem formado;
+2. **S O** é bem formado;
+3. **S (S O)** é bem formado;
+4. **(S S) O** não é bem formado.
 
-"Checar" é diferente de provar.
+O comando *Check X* verifica se a fórmula *X* é bem formada; se for bem formada, o comando retorna o tipo da fórmula.
 
-Uma fórmula pode ser bem formada e mesmo assim ser falsa.
+"Checar" é diferente de provar: uma fórmula pode ser bem formada e mesmo assim ser falsa.
 
-Por exemplo: False.
+Por exemplo: **False**.
 
+```coq
 Check False.
-> False : Prop.
+> False : Prop
+```
 
-Exemplo de fórmula do tipo nat -> Prop
+Outros exemplos.
 
-fun n : nat => n = n
-     : nat -> Prop
+```coq
+Check True.
+> True : Prop
+```
 
+```coq
+Check 3.
+> 3 : nat
+```
 
+```coq
+Check (3+4).
+> 3 + 4 : nat
+```
 
+```coq
+Check (3=5).
+> 3 = 5 : Prop
+```
+
+```coq
+Check ((3=5)/\True).
+> 3 = 5 /\ True : Prop
+```
+
+```coq
+Check nat -> Prop.
+> nat -> Prop : Type
+```
+
+Exemplo de fórmula do tipo nat $\rightarrow$ Prop
+
+```coq
+fun (n : nat) => n = n
+     : nat -> Propss
+```
+
+A notação **A : B** pode significar que a expressão **A** tem o tipo **B** ou que **A** é uma prova de **B**.
 
 
