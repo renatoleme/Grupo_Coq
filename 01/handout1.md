@@ -103,7 +103,7 @@ Check nat -> Prop.
 > nat -> Prop : Type
 ```
 
-Exemplo de fórmula do tipo nat $\rightarrow$ Prop
+Exemplo de fórmula do tipo nat $\rightarrow$ Prop. Note que *fun* aqui opera como o $\lambda$ na linguagem do cálculo-$\lambda$:
 
 ```coq
 fun (n : nat) => n = n
@@ -112,4 +112,39 @@ fun (n : nat) => n = n
 
 A notação **A : B** pode significar que a expressão **A** tem o tipo **B** ou que **A** é uma prova de **B**.
 
+## Fórmulas compostas
+
+As fórmulas podem ser combinadas para compor fórmulas mais complexas. Já vimos alguns exemplos.
+
+Mais exemplos:
+
+Uma função que recebe um número *x* e retorna a proposição *x = 3* [claramente, só existe um *x* que torna essa proposição verdadeira]
+
+```coq
+Check (fun x:nat => x = 3).
+fun x : nat => x = 3
+     : nat -> Prop
+```
+
+A próximo fórmula composta é uma proposição (*Prop*) que, em linguagem semi-formalizada, diz: "Para todo número natural x, x é menor que 3 ou existe um número natura x tal que y é igual a y + 3".
+
+```coq
+Check (forall x:nat, x < 3 \/ (exists y:nat, x = y + 3)).
+forall x : nat, x < 3 \/ (exists y : nat, x = y + 3)
+     : Prop
+```
+
+## Let
+
+O *let* é utilizado para criar definições locais (isto é, que só fazem sentido no ineterior de um único escopo). Por exemplo, podemos usar o let no interior de uma função.
+
+```coq
+fun n => let d := 3 in n + d
+```
+
+```coq
+fun n => let d := (fun m => m * 2) in d n * n
+```
+
+Notações *overloaded*: algumas notações possuem aplicações diferentes em contextos distintos. Exemplo, *X * Y* representa a multiplicação se *X, Y : nat*, mas significa produto cartesiano se *X, Y : Type*. Para saber a que contexto uma notação pertence, use *Locate*.
 
