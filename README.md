@@ -5,6 +5,7 @@ O sistema do Coq oferece uma linguagem na qual se pode definir objetos matemáti
 ## Recursos
 * Versão mais recente do programa (Windows, Linux e Mac): https://github.com/coq/platform/releases/tag/2022.04.1
 * Coq no browser: https://coq.vercel.app/ 
+* Documentação oficial: https://coq.inria.fr/distrib/current/refman/
 
 ## Materiais didáticos
 * Software Foundations: https://softwarefoundations.cis.upenn.edu/
