@@ -146,5 +146,6 @@ fun n => let d := 3 in n + d
 fun n => let d := (fun m => m * 2) in d n * n
 ```
 
-Notações *overloaded*: algumas notações possuem aplicações diferentes em contextos distintos. Exemplo, *X * Y* representa a multiplicação se *X, Y : nat*, mas significa produto cartesiano se *X, Y : Type*. Para saber a que contexto uma notação pertence, use *Locate*.
+Notações *overloaded*: algumas notações possuem aplicações diferentes em contextos distintos. Exemplo, *X * Y* representa a multiplicação se *X, Y : nat*, mas significa produto cartesiano se *X, Y : Type*. Para saber quais são os contextos de uma notação, use *Locate*.
 
+     
