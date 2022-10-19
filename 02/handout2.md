@@ -9,17 +9,24 @@ Gallina é uma linguagem de programação puramente funcional. Em outras palavra
 
 Um programa no Coq é uma função. Uma função é uma regra que especifica a transformação de um objeto de tipo X em um objeto de tipo Y (possivelmente igual a X). 
 
-Através de um processo conhecido como *currying*, essa definição pode ser generalizada. Considere a função $f$ a seguir:
+## Currying
+
+Você deve ter notado que, ao checar o tipo de uma função que recebe múltiplos parâmetros, a resposta é sempre
+
+```
+tipo1 -> tipo2 -> ... -> tipon
+```
+
+Isso se dá através de um processo conhecido como *currying*, que transforma $f (a, b)$ em $f(a) b$. Considere a função $f$ a seguir:
 
 $$
 \begin{align}
-f &: X_0 \rightarrow X_1 \rightarrow \cdots \rightarrow X_n \\
-  &: X_0 \rightarrow (X_1 \rightarrow ... \rightarrow X_{n-1} \rightarrow X_n)  \\
-  &: X_0 \rightarrow (X_1 \rightarrow ... \rightarrow (X_{n-1} \rightarrow X_n))
+f &: (X_0 * X_1 * \cdots * X_n) \rightarrow Y \\
+c(f)  &: (X_0 * X_1 * \cdots) \rightarrow (X_n \rightarrow Y)  \\
+  &: X_0 \rightarrow ( X_1 \rightarrow \cdots \rightarrow (X_n \rightarrow Y))  
 \end{align}
 $$
 
-Neste exemplo, *f* é uma regra que transforma do tipo $X_0$ no tipo $f_0 : X_1 \rightarrow ... \rightarrow X_{n-1} \rightarrow X_n$. O tipo $f_0$, por sua vez, é uma regra que transforma do tipo $X_1$ no tipo $f_1 : ... \rightarrow (X_{n-1} \rightarrow X_n)$, e assim por diante. Na prática, o *currying* transforma uma função de $n$ valores de entrada em uma série de funções que recebem, cada uma, uma única entrada.
 
 ## Funções anônimas e nomeadas
 
