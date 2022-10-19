@@ -70,7 +70,7 @@ No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** 
 > ?
 
 > **Exercício**
-> Defina os operadores usuais da lógica clássica utilizando o tipo bool.
+> Defina os operadores usuais da lógica clássica utilizando o tipo bool e o *if-then-else*.
 
 ## Programando com os naturais
 
