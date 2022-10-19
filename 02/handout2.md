@@ -27,6 +27,13 @@ c(f)  &: (X_0 * X_1 * \cdots) \rightarrow (X_n \rightarrow Y)  \\
 \end{align}
 $$
 
+Note que a associatividade do operador produto cartesiano $*$ é inversa a associatividade do operador $\rightarrow$.
+
+> **Curiosidade**
+> O operador $\rightarrow$ é apenas uma notação (*syntactic sugar*) para 
+> ```coq
+> forall _ : A, B
+> ```
 
 ## Funções anônimas e nomeadas
 
