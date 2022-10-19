@@ -61,13 +61,13 @@ else (* faça aquilo *)
 No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** sempre que o valor assumido pela variável avaliada for igual ao primeiro valor do tipo da variável. Em qualquer outro caso, a avaliação é **falsa** e o interpretador executa a cláusula do *else*.
 
 > **Exercício**
-> O que aconteceria se o tipo bool fosse definido da seguinte maneira:
+> O que aconteceria se o tipo bool fosse definido da seguinte maneira?
 >```coq
 >Inductive bool : Type :=
 >| false
 >| true.
 >```
-> ?
+> Dica: "Logic is not a body of doctrine, but a mirror-image of the world. Logic is transcendental." (TLP, 6.13)
 
 > **Exercício**
 > Defina os operadores usuais da lógica clássica utilizando o tipo bool e o *if-then-else*.
