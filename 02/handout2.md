@@ -96,7 +96,7 @@ Seja *type1* um tipo definido como
 
 ```coq
 Inductive type1 :=
-| A : X -> Y -> ... -> Z -> type1
+| A : X -> Y -> ... -> Z -> type1.
 ```
 O **match** de um termo de tipo X mapeia cada possível valor de X a uma ação. Exemplo:
 
