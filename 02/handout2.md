@@ -142,6 +142,9 @@ end.
 > **Exercício**
 > Tente definir *plus* sem utilizar recursão. Procure entender porque não é possível.
 
+> **Exercício**
+> Defina os demais operadores aritméticos usuais.
+
 Números naturais são empregados em contextos de contagem e, em geral, em contextos (discretos) nos quais a ordem é importante.
 
 ## Programando com listas
@@ -246,3 +249,20 @@ Assim como definimos, acima, *exists_false* em termos do *all_true*, utilizando 
 ```coq
 Definition all_false (l : list bool) := all_true (map negb l).
 ```
+
+# Exercícios
+
+>**Exercise on lists, map, and app** Define a function that takes as input a number n and
+returns a list with n elements, from 0 to n − 1.
+
+>**Exercise on sorting** Define a function that takes a list as input and returns true when
+it has less than 2 elements or when the first element is smaller than or equal to
+the second one. Then define a function that takes a list as input and returns true
+exactly when this list is sorted (Hint: when the list has at least two elements, the
+first element must be smaller than the second element and the tail must be sorted,
+use the first function to write the second one).
+
+>**Exercise on counting** Knowing that the Coq system provides a function Nat.eqb to
+compare two natural numbers (Nat.eqb n p returns true exactly when n = p),
+define a function count list that takes a natural number and a list and returns
+the number of times the natural number occurs in the list.
