@@ -121,7 +121,7 @@ Nesse exemplo, construímos um padrão extra para o tipo da lista: um padrão qu
 
 ## Programando com os naturais
 
-Ao contrário do tipo **bool**, existem infinitos objetos do tipo **nat**. Para definí-lo, utilizamos recursão sobre a definição indutiva
+Ao contrário do tipo **bool**, existem infinitos objetos do tipo **nat**. Para definí-lo, utilizamos recursão.
 
 ```coq
 Inductive nat :=
@@ -129,6 +129,20 @@ Inductive nat :=
 | S (n : nat).
 ```
 
+Podemos pensar o tipo **nat** como um conjunto infinito que é gerado indutivamente. Sobre os elementos desse conjunto, como usual, definimos operações como soma, subtração (restrita), multiplicação e exponenciação. 
+
+```coq
+Fixpoint plus (a b : nat) :=
+match a with
+| O => b
+| S n => S (plus n b) 
+end.
+```
+
+> **Exercício**
+> Tente definir *plus* sem utilizar recursão. Procure entender porque não é possível.
+
+Números naturais são empregados em contextos de contagem e, em geral, em contextos (discretos) nos quais a ordem é importante.
 
 ## Programando com listas
 
