@@ -96,17 +96,14 @@ Seja *type1* um tipo definido como
 
 ```coq
 Inductive type1 :=
-| A
-| B
-...
+| A : X -> Y -> ... -> Z -> type1
 ```
-O **match** de um *term : type1* mapeia cada possível forma de *term* a uma ação. Exemplo:
+O **match** de um termo de tipo X mapeia cada possível valor de X a uma ação. Exemplo:
 
 ```coq
 match (term : type1) with
-| A => ...
-| B => ...
-...
+| A x y .. z => ...
+end.
 ```
 
 Além disso, o **match** permite o uso de padrões mais complexos. Exemplo:
