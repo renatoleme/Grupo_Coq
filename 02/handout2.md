@@ -214,7 +214,7 @@ Check 1::2::3::4::nil.
 
 ### Concatenação
 
-A operação de *concatenação* corresponde a operação de "grudar" um elemento de tipo *X* em outro elemento do tipo *X*. Por exemplo, a concatenação da string "Hello, " com a string "World!" resulta em "Hello, World!".
+A operação de *concatenação* corresponde a operação de "grudar" um elemento de tipo *X* em outro elemento do tipo *Y*. Por exemplo, a concatenação da string "Hello, " com a string "World!" resulta em "Hello, World!".
 
 Para concatenar uma lista com outra utiliza-se o operador **_ ++ _**. 
 
@@ -250,7 +250,7 @@ Assim como definimos, acima, *exists_false* em termos do *all_true*, utilizando 
 Definition all_false (l : list bool) := all_true (map negb l).
 ```
 
-# Exercícios
+# Exercícios (coq-hurry)
 
 >**Exercise on lists, map, and app** Define a function that takes as input a number n and
 returns a list with n elements, from 0 to n − 1.
