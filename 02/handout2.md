@@ -120,7 +120,7 @@ match l with
 end.
 ```
 
-Nesse exemplo, construímos um padrão extra para o tipo da lista: um padrão que captura os dois primeiros elementos.
+Nesse exemplo, construímos um padrão extra para o tipo da lista: um padrão que captura os dois primeiros elementos de uma lista de naturais qualquer.
 
 ## Programando com os naturais
 
