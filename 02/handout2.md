@@ -189,6 +189,8 @@ Compute map negb [true;false;true;false].
 : list bool
 ```
 
+Assim como definimos, acima, *exists_false* em termos do *all_true*, utilizando o **map** podemos definir, também, uma função *all_false*:
+
 ```coq
 Definition all_false (l : list bool) := all_true (map negb l).
 ```
