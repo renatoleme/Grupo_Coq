@@ -109,8 +109,18 @@ match (term : type1) with
 ...
 ```
 
-Além disso, o match permite o uso de padrões mais complexos.
+Além disso, o **match** permite o uso de padrões mais complexos. Exemplo:
 
+```coq
+Definition getFirstTwo (l : list nat) :=
+match l with
+| nil => nil
+| h1::h2::tl => h1::h2::nil
+| h::tl => h::tl
+end.
+```
+
+Nesse exemplo, construímos um padrão extra para o tipo da lista: um padrão que captura os dois primeiros elementos.
 
 ## Programando com os naturais
 
