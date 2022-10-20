@@ -36,6 +36,25 @@ Note que a associatividade do operador produto cartesiano $*$ é inversa a assoc
 > forall _ : A, B
 > ```
 
+## O estilo *match-pattern*
+
+Seja *term* um objeto definido como
+
+```coq
+Inductive term :=
+| pattern_1
+| pattern_2
+...
+```
+O **match** de *term* será
+
+```coq
+match term with
+| pattern_1
+| pattern_2
+...
+```
+
 ## Funções anônimas e nomeadas
 
 No Coq, uma função pode ser anônima ou nomeada. Já vimos alguns exemplos do primeiro tipo: são funções definidas através da abstração *fun*.
@@ -91,6 +110,14 @@ No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** 
 > Defina os operadores usuais da lógica clássica utilizando o tipo bool e o *if-then-else*.
 
 ## Programando com os naturais
+
+Ao contrário do tipo **bool**, existem infinitos objetos do tipo **nat**. Para definí-lo, utilizamos recursão sobre a definição indutiva
+
+```coq
+Inductive nat :=
+| O
+| S (n : nat).
+```
 
 
 
