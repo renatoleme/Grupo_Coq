@@ -89,3 +89,57 @@ No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** 
 ## Programando com os naturais
 
 ## Programando com listas
+
+A definição recursiva usual de lista diz que uma lista de *X* é
+
+1. vazia; ou
+2. uma construção contendo um elemento de tipo *X* (cabeça) e uma lista de *X* (cauda);
+
+Assim como os naturais, o tipo das listas é um dos tipos *built-in* do Coq. Para utilizá-lo, adicione no início do seu código
+
+```coq
+Require Import List. (* Importa as definições e teoremas *)
+Import ListNotations. (* Importa as notações *)
+```
+
+### Append
+
+Para adicionar um elemento em uma lista, utiliza-se o operador **_ :: _**.
+
+Seja **a** um elemento de tipo *X* e **L** uma lista de elementos de tipo *X*, então
+
+```
+a::L = [a;..L]
+```
+
+#### Exemplo
+
+```coq
+Check nil.
+: list ?T
+```
+
+```coq
+Check 1::2::3::4::nil.
+: list nat
+```
+
+### Concatenação
+
+A operação de *concatenação* corresponde a operação de "grudar" um elemento de tipo X em outro elemento do tipo X. Por exemplo, a concatenação da string "Hello, " com a string "World!" resulta em "Hello, World!".
+
+Para concatenar uma lista com outra utiliza-se o operador **_ ++ _**. 
+
+Sejam **A** e **B** duas listas, então
+
+```
+A ++ B = [..A;..B]
+```
+
+#### Exemplo
+
+```coq
+Compute (1::2::nil) ++ (3::4::nil).
+= [1;2;3;4]
+: list nat
+```
