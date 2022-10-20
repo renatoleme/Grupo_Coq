@@ -4,7 +4,7 @@
 
 Gallina é uma linguagem de programação puramente funcional. Em outras palavras, ela é fundada em dois princípios básicos: 
 
-1. **Imutabilidade dos dados:** não existe efeito colateral, o mapeamento input/output é perfeito;
+1. **Imutabilidade dos dados:** não existe efeito colateral, i.e, o mapeamento input/output é perfeito, garantindo que o resultado do output dependa exclusivamente do valor dos parâmetros passados como input;
 2. **Primazia das funções**: toda função possui um tipo e, como tal, é um elemento que pode ser passado como parâmetro para outras funções.
 
 Um programa no Coq é uma função. Uma função é uma regra que especifica a transformação de um objeto de tipo X em um objeto de tipo Y (possivelmente igual a X). 
@@ -54,7 +54,7 @@ Funções nomeadas, por sua vez, podem ser definidas de duas maneiras:
 
 ### Fixpoint
 
-## O tipo **bool** e as condicionais
+## Programando com os booleanos
 
 Se existisse uma hierarquia, o **bool** seria o terceiro tipo mais simples possível (perdendo apenas para o tipo vazio e o tipo unitário). Apesar disso, como se sabe, o tipo **bool** é extremamente útil. 
 
@@ -91,6 +91,8 @@ No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** 
 > Defina os operadores usuais da lógica clássica utilizando o tipo bool e o *if-then-else*.
 
 ## Programando com os naturais
+
+
 
 ## Programando com listas
 
@@ -130,7 +132,7 @@ Definition lista_b := [true;false;false;true].
 Compute all_true lista_b.
 = false
 : bool
-Compute exists_true lista_b.
+Compute exists_false lista_b.
 = true
 : bool
 ```
