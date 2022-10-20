@@ -102,9 +102,9 @@ Require Import List. (* Importa as definições e teoremas *)
 Import ListNotations. (* Importa as notações *)
 ```
 
-### Append
+### Anexação
 
-Para adicionar um elemento em uma lista, utiliza-se o operador **_ :: _**.
+Para adicionar (anexar) um elemento em uma lista, utiliza-se o operador **_ :: _**.
 
 Seja **a** um elemento de tipo *X* e **L** uma lista de elementos de tipo *X*, então
 
