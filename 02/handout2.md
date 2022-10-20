@@ -22,8 +22,9 @@ Isso se dá através de um processo conhecido como *currying*, que transforma $f
 $$
 \begin{align}
 f &: (X_0 * X_1 * \cdots * X_n) \rightarrow Y \\
-c(f)  &: (X_0 * X_1 * \cdots) \rightarrow (X_n \rightarrow Y)  \\
-  &: X_0 \rightarrow ( X_1 \rightarrow \cdots \rightarrow (X_n \rightarrow Y))  
+curry(f)  &= (X_0 * X_1 * \cdots) \rightarrow (X_n \rightarrow Y)  \\
+  &= (X_0 * X_1) \rightarrow (\cdots \rightarrow (X_n \rightarrow Y)) \\
+    &= X_0 \rightarrow ( X_1 \rightarrow (\cdots \rightarrow (X_n \rightarrow Y)))  
 \end{align}
 $$
 
@@ -72,6 +73,9 @@ if true then (* faça isso *)
 else (* faça aquilo *)
 ```
 
+```coq
+Definition negb (a : bool) := if a then false else true.
+```
 No Coq, a convenção estabelece que a avaliação do *if* será **verdadeira** sempre que o valor assumido pela variável avaliada for igual ao primeiro valor do tipo da variável. Em qualquer outro caso, a avaliação é **falsa** e o interpretador executa a cláusula do *else*.
 
 > **Exercício**
@@ -102,6 +106,35 @@ Require Import List. (* Importa as definições e teoremas *)
 Import ListNotations. (* Importa as notações *)
 ```
 
+As listas, sendo uma estrutura ordenada de objetos, são muito versáteis. Nesse agrupamento, os elementos estabelecem uma relação de ordem entre si, de modo que o primeiro elemento é sempre a cabeça, e o último elemento é a cabeça da última cauda.
+
+Por exemplo, considere a seguinte função que recebe uma lista de booleanos e retorna **true** se, e somente se, todos os elementos da lista são **true**.
+
+```coq
+Fixpoint all_true (l : list bool) :=
+match l with
+| nil => true
+| h::tl => if h then all_true tl else false
+end.
+
+Definition exists_false (l : list bool) := negb (all_true l).
+```
+
+
+```coq
+Definition lista_b := [true;false;false;true].
+```
+
+
+```coq
+Compute all_true lista_b.
+= false
+: bool
+Compute exists_true lista_b.
+= true
+: bool
+```
+
 ### Anexação
 
 Para adicionar (anexar) um elemento em uma lista, utiliza-se o operador **_ :: _**.
@@ -126,7 +159,7 @@ Check 1::2::3::4::nil.
 
 ### Concatenação
 
-A operação de *concatenação* corresponde a operação de "grudar" um elemento de tipo X em outro elemento do tipo X. Por exemplo, a concatenação da string "Hello, " com a string "World!" resulta em "Hello, World!".
+A operação de *concatenação* corresponde a operação de "grudar" um elemento de tipo *X* em outro elemento do tipo *X*. Por exemplo, a concatenação da string "Hello, " com a string "World!" resulta em "Hello, World!".
 
 Para concatenar uma lista com outra utiliza-se o operador **_ ++ _**. 
 
@@ -142,4 +175,20 @@ A ++ B = [..A;..B]
 Compute (1::2::nil) ++ (3::4::nil).
 = [1;2;3;4]
 : list nat
+```
+
+### Map
+
+Uma das funções de ordem superior mais conhecidas (e úteis) é o **map**. Com essa função, você transforma cada elemento de uma lista de acordo com a regra passada como parâmetro.
+
+#### Exemplo
+
+```coq
+Compute map negb [true;false;true;false].
+= [false; true; false; true]
+: list bool
+```
+
+```coq
+Definition all_false (l : list bool) := all_true (map negb l).
 ```
