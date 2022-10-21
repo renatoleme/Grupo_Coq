@@ -234,6 +234,8 @@ Compute (1::2::nil) ++ (3::4::nil).
 
 ### Map
 
+> Segundo aspecto característico de uma linguagem puramente funcional.
+
 Uma das funções de ordem superior mais conhecidas (e úteis) é o **map**. Com essa função, você transforma cada elemento de uma lista de acordo com a regra passada como parâmetro.
 
 #### Exemplo
