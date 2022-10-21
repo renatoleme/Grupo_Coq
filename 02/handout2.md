@@ -131,6 +131,12 @@ Inductive nat :=
 
 Podemos pensar o tipo **nat** como um conjunto infinito que é gerado indutivamente. Sobre os elementos desse conjunto, como usual, definimos operações como soma, subtração (restrita), multiplicação e exponenciação. 
 
+Se tratando de um tipo *built-in*, podemos importá-lo usando:
+
+```coq
+Require Import Arith.
+```
+
 ```coq
 Fixpoint plus (a b : nat) :=
 match a with
@@ -257,6 +263,14 @@ Definition all_false (l : list bool) := all_true (map negb l).
 >**Exercise on lists, map, and app** Define a function that takes as input a number n and
 returns a list with n elements, from 0 to n − 1.
 
+```coq
+Fixpoint list_n (n : nat) :=
+match n with
+| O => nil
+| S m => list_n m ++ [m]
+end.
+```
+
 >**Exercise on sorting** Define a function that takes a list as input and returns true when
 it has less than 2 elements or when the first element is smaller than or equal to
 the second one. Then define a function that takes a list as input and returns true
@@ -264,7 +278,33 @@ exactly when this list is sorted (Hint: when the list has at least two elements,
 first element must be smaller than the second element and the tail must be sorted,
 use the first function to write the second one).
 
+```coq
+Definition less_than_two (l : list nat) :=
+match l with
+| h1::h2::tl => h1 <=? h2
+| _ => true
+end.
+
+Fixpoint is_sorted (l : list nat) :=
+match l with
+| nil => true
+| h::tl => 
+    if less_than_two l then is_sorted tl
+    else false
+end.
+```
+
 >**Exercise on counting** Knowing that the Coq system provides a function Nat.eqb to
 compare two natural numbers (Nat.eqb n p returns true exactly when n = p),
 define a function count list that takes a natural number and a list and returns
 the number of times the natural number occurs in the list.
+
+```coq
+Fixpoint count_n (l : list nat) (n : nat) :=
+match l with
+| nil => 0
+| h::tl => 
+    if Nat.eqb h n then 1 + count_n tl n
+    else count_n tl n
+end.
+```
