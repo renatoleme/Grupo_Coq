@@ -32,7 +32,7 @@ Dentre as features comuns a linguagens funcionais, destacam-se
 
 # Exercícios
 
-Os exercícios a seguir foram extraídos de [Software Foundations, Vol. 1](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html).
+Os exercícios a seguir foram extraídos de [Software Foundations, Vol. 1, Cap. 1](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html).
 
 ## Exercícios básicos
 
