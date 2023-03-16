@@ -245,42 +245,6 @@ Definition orb' (a b : bool) : bool :=
 
 > "Coq's conditionals are exactly like those found in any other language, with one small generalization. Since the bool type is not built in, Coq actually supports conditional expressions over any inductively defined type with exactly two clauses in its definition. The guard is considered true if it evaluates to the "constructor" of the first clause of the Inductive definition (which just happens to be called true in this case) and false if it evaluates to the second." (LF)
 
-```coq
-(* Exercício 1 *)
-
-Definition nandb (a b : bool) : bool :=
-  match a with
-  | false => true 
-  | true => negb b
-  end.
-
-Example teste_nandb1 : (nandb true false) = true.
-Proof. simpl. reflexivity. Qed.
-Example teste_nandb2 : (nandb false false) = true.
-Proof. simpl. reflexivity. Qed.
-Example teste_nandb3 : (nandb false true) = true.
-Proof. simpl. reflexivity. Qed.
-Example teste_nandb4 : (nandb true true) = false.
-Proof. simpl. reflexivity. Qed.
-
-(* Exercício 2 *)
-
-Definition andb3 (a b c : bool) : bool :=
-  match a with
-  | false => false
-  | true => negb (orb (negb b) (negb c))
-  end.
-
-Example teste_andb31 : (andb3 true true true) = true.
-Proof. simpl. reflexivity. Qed.
-Example teste_andb32 : (andb3 false true true) = false.
-Proof. simpl. reflexivity. Qed.
-Example teste_andb33 : (andb3 true false true) = false.
-Proof. simpl. reflexivity. Qed.
-Example teste_andb34: (andb3 true true false) = false.
-Proof. simpl. reflexivity. Qed.
-```
-
 # Tipos
 
 > "Every expression in Coq has a type, describing what sort of thing it computes. The Check command asks Coq to print the type of an expression. (...) If the expression after Check is followed by a colon and a type, Coq will verify that the type of the expression matches the given type and halt with an error if not." (LF)
