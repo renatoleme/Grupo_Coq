@@ -6,9 +6,9 @@
   - [Tipos algébricos](#tipos-algébricos)
     - [Soma](#soma)
     - [Produto](#produto)
-    - [Uma soma particular: tipos enumerados](#uma-soma-particular-tipos-enumerados)
-    - [Um tipo enumerado especial](#um-tipo-enumerado-especial)
-  - [Tipos](#tipos)
+- [Tipos enumerados](#tipos-enumerados)
+  - [Um tipo enumerado especial](#um-tipo-enumerado-especial)
+- [Tipos](#tipos)
   - [Tipos compostos](#tipos-compostos)
 - [Exercícios](#exercícios)
   - [Exercícios básicos](#exercícios-básicos)
@@ -25,6 +25,7 @@
     - [(:star:) negation\_fn\_applied\_twice](#star-negation_fn_applied_twice)
     - [(:star::star::star:) andb\_eq\_orb](#starstarstar-andb_eq_orb)
     - [(:star::star::star:) binary](#starstarstar-binary)
+- [Referências](#referências)
 
 # Introdução 
 
@@ -67,7 +68,7 @@ Se, por um lado, perdemos em flexibilidade, o que força o programador a se adap
     
 Na linguagem do Coq, o único paradigma existente/permitido é o segundo.
 
-> The other sense in which functional programming is "functional" is that it emphasizes the use of functions as **first-class values** -- i.e., values that can be passed as arguments to other functions, returned as results, included in data structures, etc. The recognition that functions can be treated as data gives rise to a host of useful and powerful programming idioms. [(Introduction, SF 1)](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html)
+> "O outro sentido em que uma linguagem de programação funcional é "funcional" é que ela enfatiza o uso de funções como 'valores de primeira classe' -- i.e, valores que podem ser **passados como argumentos** para outras funções, **retornados como resultados**, **incluídos em estruturas de dados**, etc." (LF, Intro.)
 
 Dentre as *features* comuns a linguagens funcionais, destacam-se
 
@@ -118,7 +119,7 @@ End Scope string_scope.
 
 Os valores do tipo *nat_string_pair* são pares compostos por um natural **e** uma string.
 
-### Uma soma particular: tipos enumerados
+# Tipos enumerados
 
 Tipos enumerados (*enumerated types*) são tipos de soma em que seus construtores não tomam nenhum argumento: cada construtor define exatamente um valor.
 
@@ -170,7 +171,7 @@ Qed.
 > "... essentially this can be read as "The assertion we've just made can be proved by observing that both sides of the equality evaluate to the same thing."" (LF)
 > > Ambos os lados são "correferenciais" (Alan René).
 
-### Um tipo enumerado especial
+## Um tipo enumerado especial
 
 Um tipo de dado enumerado, em particular, é um velho conhecido dos lógicos e programadores. Trata-se do tipo bool (em homenagem a George Boole, pai da lógica algébrica), e possui apenas dois construtores: *true* e *false*.
 
@@ -280,7 +281,7 @@ Example teste_andb34: (andb3 true true false) = false.
 Proof. simpl. reflexivity. Qed.
 ```
 
-## Tipos
+# Tipos
 
 > "Every expression in Coq has a type, describing what sort of thing it computes. The Check command asks Coq to print the type of an expression. (...) If the expression after Check is followed by a colon and a type, Coq will verify that the type of the expression matches the given type and halt with an error if not." (LF)
 >
@@ -577,3 +578,7 @@ Example test_bin_incr6 :
         bin_to_nat (incr (incr (B1 Z))) = 2 + bin_to_nat (B1 Z).
 (* FILL IN HERE *) Admitted.
 ```
+
+# Referências
+
+(LF) "Logical Foundations", (https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html).
