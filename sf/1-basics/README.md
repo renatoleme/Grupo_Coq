@@ -162,7 +162,7 @@ Definition proximo_dia_util
 Compute proximo_dia_util (proximo_dia_util Quarta).
 
 Example teste_proximo_dia_util :
-  (proximo_dia_util (proximo_dia_util terca)) = Quinta.
+  (proximo_dia_util (proximo_dia_util Terca)) = Quinta.
 Proof.
   simpl. reflexivity.
 Qed.
