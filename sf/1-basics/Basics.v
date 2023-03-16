@@ -29,6 +29,8 @@ Open Scope string_scope.
 
 Check Pair (23 , "Hello World!").
 
+Close Scope string_scope.
+
 (**)
 
 Inductive dia : Type := 
