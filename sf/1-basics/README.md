@@ -104,7 +104,7 @@ Cada valor de string_or_nat *ou* é string *ou* é nat. Não pode ser ambos, por
 
 São tipos compostos da conjunção de outros tipos. É o caso das tuplas. 
 
-Considere o seguinte tipo de par ordenado $nat\_string\_pair : nat \times string$.
+Considere o seguinte tipo de par ordenado *nat_string_pair* $: nat \times string$.
 
 ```coq
 Inductive nat_string_pair :=
