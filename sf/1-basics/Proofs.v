@@ -17,7 +17,7 @@ Require Import Bool.
 
 Theorem plus_0_n : forall n, 0 + n = n.
 Proof.
-  intros n.
+  intros n'.
   simpl.
   reflexivity.
 Qed.
@@ -36,15 +36,21 @@ The keywords intros, simpl, and reflexivity are examples of tactics. A tactic is
 
 Theorem plus_1_l : forall n : nat, 1 + n = S n.
 Proof.
-  intros n.
+  intros n. simpl.
   reflexivity.
 Qed.
 
 Theorem mult_0_l : forall n : nat, 0 * n = 0.
 Proof.
-  intros n.
+  intros n. simpl.
   reflexivity.
 Qed.
+
+Theorem teorema_falho : forall n : nat, n + 1 = n.
+Proof.
+  intros n.
+  simpl.
+Abort.
 
 (*
 It is worth stepping through these proofs to observe how the context and the goal change.
@@ -62,7 +68,7 @@ Proof.
   (* move the hypothesis into the context: *)
   intros H.
   (* rewrite the goal using the hypothesis: *)
-  rewrite -> H.
+  rewrite <- H.
   (* rewrite <- H. *)
   reflexivity.
 Qed.
@@ -70,9 +76,13 @@ Qed.
 (* Exercício *)
 
 Theorem plus_id_exercise : forall n m o : nat,
-  n = m -> m = 0 -> n + m = m + o.
+  n = m -> m = o -> n + m = m + o.
 Proof.
-Admitted.
+  intros n m o H1 H2.
+  rewrite -> H1.
+  rewrite <- H2.
+  reflexivity.
+Qed.
 
 (*Be careful (...): every time you say Admitted you are leaving a door open for total nonsense to enter Coq's nice, rigorous, formally checked world!*)
 
@@ -92,17 +102,24 @@ Qed.
 
 Theorem mult_n_1 : forall p : nat,
   p * 1 = p.
-Admitted.
+Proof.
+  intros p.
+  Check mult_n_Sm.
+  rewrite <- mult_n_Sm.
+  rewrite <- mult_n_O.
+  simpl.
+  reflexivity.
+Qed.
 
 (* Prova por Análise de Caso *)
 
 Theorem plus_1_neq_0 : forall n : nat,
   (n + 1) =? 0 = false.
 Proof.
-  intros n.
-  destruct n as [| n'] eqn:E.
-  - reflexivity.
-  - reflexivity.
+  intros n. simpl.
+  destruct n.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
 Qed.
 
 (*
@@ -116,9 +133,9 @@ The destruct tactic can be used with any inductively defined datatype. For examp
 Theorem negb_involutive : forall b : bool,
   negb (negb b) = b.
 Proof.
-  intros b. destruct b eqn:E.
-  - reflexivity.
-  - reflexivity. 
+  intros b. simpl. destruct b.
+  - simpl. reflexivity.
+  - simpl. reflexivity. 
 Qed.
 
 (* 
@@ -131,13 +148,7 @@ Duas boas práticas:
 
 Theorem andb_commutative : forall b c : bool, andb b c = andb c b.
 Proof.
-  intros b c. destruct b eqn:Eb.
-  - destruct c eqn:Ec.
-    + reflexivity.
-    + reflexivity.
-  - destruct c eqn:Ec.
-    + reflexivity.
-    + reflexivity.
+  intros b c. destruct b eqn:Eb. destruct c eqn:Ec. reflexivity. reflexivity. destruct c eqn:Ec. reflexivity. reflexivity.
 Qed.
 
 Theorem andb_commutative' : forall b c : bool, andb b c = andb c b.
