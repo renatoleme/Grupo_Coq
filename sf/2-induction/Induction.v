@@ -212,17 +212,23 @@ Proof.
 Theorem mul_0_r : forall n:nat,
   n * 0 = 0.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [| n' IHn'].
+  - reflexivity.
+  - simpl. rewrite IHn'.  reflexivity.
+Qed.
 
 Theorem plus_n_Sm : forall n m : nat,
   S (n + m) = n + (S m).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m. induction n as [| n' IHn'].
+  - reflexivity.
+  - simpl. rewrite plus_n_Sm. reflexivity.
+Qed.
 
 Theorem add_comm : forall n m : nat,
   n + m = m + n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m. induction n as [| n ]
 
 Theorem add_assoc : forall n m p : nat,
   n + (m + p) = (n + m) + p.
@@ -380,7 +386,7 @@ Proof.
     many different readers, some of whom may be convinced by a
     particular way of phrasing the argument, while others may not be.
     Some readers may be particularly pedantic, inexperienced, or just
-    plain thick-headed; the only way to convince them will be to make
+    plain thick-headed [cabeça-dura]; the only way to convince them will be to make
     the argument in painstaking detail.  But other readers, more
     familiar in the area, may find all this detail so overwhelming
     that they lose the overall thread; all they want is to be told the
