@@ -1,6 +1,5 @@
 From LF Require Export Lists.
 
-
 (* Polimorfismo e funções de alta ordem. *)
 
 (* PARTE 1: POLIMORFISMO *)
