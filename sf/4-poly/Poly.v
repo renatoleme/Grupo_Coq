@@ -1,12 +1,39 @@
 From LF Require Export Lists.
 
+
+(* Polimorfismo e funções de alta ordem. *)
+
+(* PARTE 1: POLIMORFISMO *)
+
+(* Motivação *)
+
+Inductive boollist : Type :=
+  | bool_nil
+  | bool_cons (b : bool) (l : boollist).
+
+(*
+
+  Um tipo de lista para cada tipo de dado
+  ---> Todas as funções precisariam ser redefinidas!
+
+ *)
+
 (* Polimorfismo *)
 
 Inductive list (X : Type) : Type :=
 | nil
-| cons (x : X) (l : list X).
+| cons : X -> list X -> list X.
+
+(* 
+
+ '' What sort of thing is list itself? 
+  (...) list is a function from Types to Type ''
+
+*)
 
 Check list : Type -> Type.
+
+Check list nat.
 
 Check (nil nat) : list nat.
 
@@ -14,47 +41,52 @@ Check (cons nat 3 (nil nat)) : list nat.
 
 Check nil : forall X : Type, list X.
 
-Check nil.
+Check nil bool.
+
+Check nil nat.
 
 Check cons.
 
-Fixpoint repeat (X : Type) (x : X) (count : nat) : list X :=
+Fixpoint repeat
+  (X : Type)
+  (x : X)
+  (count : nat) : list X :=
   match count with
     0 => nil X
   | S count' => cons X x (repeat X x count')
   end.
 
-Example test_repeat1 :
-  repeat nat 4 2 = cons nat 4 (cons nat 4 (nil nat)).
-Proof.
-  simpl. reflexivity.
-Qed.
-
-Example test_repeat2 :
-  repeat bool false 1 = cons bool false (nil bool).
-Proof.
-  simpl. reflexivity.
-Qed.
+Compute repeat nat 5 4.
+Compute repeat bool true 4.
 
 (* Exercício mumble_grumble *)
 
 Module MumbleGrumble.
-  
+
   Inductive mumble : Type :=
-    a
+  | a
   | b (x : mumble) (y : nat)
   | c.
-  
+
   Inductive grumble (X:Type) : Type :=
-    d (m : mumble)
+  | d (m : mumble)
   | e (x : X).
-  
-  Check d.
-  
-  Check e bool false.
+
+  (*
+      Qual dos Checks abaixo vai retornar 
+      grumble X, para algum tipo X? 
+  *)
+
+  (* Check d (b a 5). *)
+  (* Check d mumble (b a 5). *)
+  (* Check d bool (b a 5). *)
+  (* Check e bool true. *)
+  (* Check e mumble (b c 0). *)
+  (* Check e bool (b c 0). *)
+  (* Check c. *)
 
 End MumbleGrumble.
-  
+
 Fixpoint repeat' X x count :=
   match count with
     0 => nil X
@@ -67,118 +99,140 @@ Fixpoint repeat'' X x count : list X :=
   | S count' => cons _ x (repeat'' _ x count')
   end.
 
-Definition list123' := cons _ 1 (cons _ 2 (cons _ 3 (nil _))).
+Definition list123' := 
+cons _ 1 (cons _ 2 (cons _ 3 (nil _))).
+
+(* Forçando type inference: *)
 
 Arguments nil {X}.
 Arguments cons {X}.
 Arguments repeat {X}.
 
-Definition list123'' := cons 1 (cons 2 (cons 3 nil)).
+Compute repeat true 8.
 
-Fixpoint repeat''' {X : Type} (x : X) (count : nat) : list X :=
+Definition list123'' := 
+cons 1 (cons 2 (cons 3 nil)).
+
+(* 
+    Um outro jeito de forçar o type inference é 
+    na  declaração do tipo: 
+*)
+
+Fixpoint repeat'''
+  {X : Type}
+  (x : X)
+  (count : nat) : list X :=
   match count with
     O => nil
   | S count' => cons x (repeat''' x count')
   end.
 
 Inductive list' {X : Type} : Type :=
-  nil'
+| nil'
 | cons' (x : X) (l : list').
 
-(* Problema: ambas as listas são list' (e não list nat e list bool)*)
+(* 
+  Problema: ambas as listas são list'
+    (e não list nat e list bool)
+*)
 Check cons' true (cons' false (nil')) : list'.
 Check cons' 3 (cons' 2 (nil')) : list'.
 
-Fixpoint app {X : Type} (l1 l2 : list X) : list X :=
+(* Isso não ocorre no caso de uso do Arguments *)
+
+Check cons true (cons false (nil)) : list bool.
+Check cons 3 (cons 2 (nil)) : list nat.
+
+(************)
+(* Re-definindo outras funções, agora usando polimorfismo e type inference. *)
+(************)
+
+Fixpoint app
+  {X : Type}
+  (l1 l2 : list X) : list X :=
   match l1 with
     nil => l2
   | cons h t => cons h (app t l2)
   end.
 
-Fixpoint rev {X : Type} (l : list X) :=
+Fixpoint rev
+  {X : Type}
+  (l : list X) :=
   match l with
     nil => nil
   | cons h t => app (rev t) (cons h nil)
   end.
 
-Fixpoint length {X : Type} (l : list X) : nat :=
+Fixpoint length 
+  {X : Type} 
+  (l : list X) : nat :=
   match l with
     nil => O 
   | cons _ t => S (length t)
   end.
 
 Example test_rev1 :
-  rev (cons 1 (cons 2 nil)) = (cons 2 (cons 1 nil)).
+  rev (cons 1 (cons 2 nil)) 
+  = (cons 2 (cons 1 nil)).
 Proof. reflexivity. Qed.
 Example test_rev2:
-  rev (cons true nil) = cons true nil.
+  rev (cons true nil) 
+  = cons true nil.
 Proof. reflexivity. Qed.
-Example test_length1: length (cons 1 (cons 2 (cons 3 nil))) = 3.
+Example test_length1: 
+  length (cons 1 (cons 2 (cons 3 nil))) = 3.
 Proof. reflexivity. Qed.
 
-(**)
+(* As vezes, o type inference falha. *)
+
 Fail Definition mynil := nil.
+
+(* Neses casos, devemos ser explícitos: *)
+
 Definition mynil : list nat := nil.
+
+(* Alternativamente, podemos forçar os argumentos implícitos a serem explícitos prefixando o nome da função com @ *)
+
 Check @nil : forall X : Type, list X.
 Definition mynil' := @nil nat.
 
-Notation "x :: y" := (cons x y)
-                       (at level 60, right associativity).
+Notation "x :: y" 
+  := (cons x y) (at level 60, right associativity).
 Notation "[ ]" := nil.
-Notation "[ x ; .. ; y ]" := (cons x .. (cons y []) ..).
-Notation "x ++ y" := (app x y)
-                       (at level 60, right associativity).
+Notation "[ x ; .. ; y ]" 
+  := (cons x .. (cons y []) ..).
+Notation "x ++ y" 
+  := (app x y) (at level 60, right associativity).
 
 (* Exercícios *)
 
-Theorem app_nil_r : forall (X : Type), forall l : list X,
-    l ++ [] = l.
-Proof.
-  induction l.
-  - simpl. reflexivity.
-  - simpl. rewrite IHl. reflexivity.
-Qed.
+Theorem app_nil_r :
+  forall (X : Type), forall l : list X,
+    l ++ [] = l. 
+Admitted.
 
-Theorem app_assoc : forall A (l m n : list A),
-    l ++ m ++ n = (l ++ m) ++ n.
-Proof.
-  induction l.
-  - intros. simpl. reflexivity.
-  - intros. simpl. rewrite IHl. reflexivity.
-Qed.
+Theorem app_assoc :
+  forall A (l m n : list A),
+    l ++ m ++ n = (l ++ m) ++ n. 
+Admitted.
 
-Lemma app_length : forall (X : Type) (l1 l2 : list X),
+Lemma app_length :
+  forall (X : Type) (l1 l2 : list X),
     length (l1 ++ l2) = length l1 + length l2.
-Proof.
-  intros.
-  induction l1.
-  - simpl. reflexivity.
-  - simpl. rewrite IHl1. reflexivity.
-Qed.
+Admitted.
 
 (**)
 
-Theorem rev_app_distr : forall X (l1 l2 : list X),
+Theorem rev_app_distr :
+  forall X (l1 l2 : list X),
     rev (l1 ++ l2) = rev l2 ++ rev l1.
-Proof.
-  intros.
-  induction l1.
-  - simpl. induction l2.
-    + simpl. reflexivity.
-    + simpl. rewrite IHl2. rewrite app_nil_r. simpl.
-      rewrite app_nil_r. reflexivity.
-  - simpl.
-    rewrite IHl1. simpl. rewrite app_assoc. reflexivity.
-Qed.
+Admitted.
 
-Theorem rev_involutive: forall X : Type, forall l : list X,
+Theorem rev_involutive: 
+  forall X : Type, forall l : list X,
     rev (rev l) = l.
-Proof.
-  induction l as [| n l' IHl].
-  - simpl. reflexivity.
-  - simpl. rewrite rev_app_distr. rewrite IHl. simpl. reflexivity.
-Qed.
-      
+Admitted.
+
 (* Pares polimórficos *)
 
 Inductive prod (X Y : Type) : Type :=
