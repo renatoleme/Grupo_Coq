@@ -197,7 +197,7 @@ Proof.
   - (* n = 0 *)
     simpl. reflexivity.
   - (* n = S n' *)
-    simpl. rewrite <- IHn'. reflexivity.  Qed.
+    simpl. rewrite -> IHn'. reflexivity.  Qed.
 
 (** (The use of the [intros] tactic in these proofs is actually
     redundant.  When applied to a goal that contains quantified
@@ -228,7 +228,7 @@ Qed.
 Theorem add_comm : forall n m : nat,
   n + m = m + n.
 Proof.
-  intros n m. induction n as [| n ]
+  intros n m. Admitted.
 
 Theorem add_assoc : forall n m p : nat,
   n + (m + p) = (n + m) + p.

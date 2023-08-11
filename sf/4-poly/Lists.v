@@ -181,8 +181,8 @@ Module NatList.
 
   (* Exercícios *)
 
-  (*Fixpoint nonzeros (l : natlist) : natlist.
-  Admitted.*)
+  Fixpoint nonzeros (l : natlist) : natlist.
+  Admitted.
 
   Example test_nonzeros:
     nonzeros [0;1;0;2;3;0;0] = [1;2;3].
@@ -352,7 +352,7 @@ Module NatList.
 
   Fixpoint rev (l : natlist) : natlist :=
     match l with
-    | nil => nil
+      nil => nil
     | h :: t => rev t ++ [h]
     end.
 
@@ -405,13 +405,11 @@ Module NatList.
   Proof. Admitted.
   
   Theorem app_assoc4 : forall l1 l2 l3 l4 : natlist,
-      l1 ++ (l2 ++ (l3 ++ l4)) = 
-      ((l1 ++ l2) ++ l3) ++ l4.
+      l1 ++ (l2 ++ (l3 ++ l4)) = ((l1 ++ l2) ++ l3) ++ l4.
   Proof. Admitted.
 
   Lemma nonzeros_app : forall l1 l2 : natlist,
-      nonzeros (l1 ++ l2) = 
-      (nonzeros l1) ++ (nonzeros l2).
+      nonzeros (l1 ++ l2) = (nonzeros l1) ++ (nonzeros l2).
   Proof. Admitted.
   
   (**)
@@ -480,8 +478,7 @@ Module NatList.
   | Some (n : nat)
   | None.
 
-  Fixpoint nth_error 
-  (l : natlist) (n : nat) : natoption :=
+  Fixpoint nth_error (l : natlist) (n : nat) : natoption :=
     match l with
     | nil => None
     | a :: l' =>
@@ -574,35 +571,6 @@ Module NatList.
 
   End PartialMap.
 
- 
- Fixpoint  nonzeros (l : natlist) : natlist :=
- match l with
- | nil => nil
- | h :: t => match h with
-              | 0 => (nonzeros t)
-              | S n => h :: (nonzeros t)
-             end
- end.
- 
-Compute nonzeros [0;6;4;0;2].
-
-Fixpoint LivreDeZero (l : natlist) : bool :=
-match l with
-| nil => true
-| h :: tl => if (Nat.eqb h 0) then false
- else LivreDeZero tl
-end.
-
-Theorem nonzeros_correct : forall (l : natlist),
-  LivreDeZero (nonzeros l) = true.
-Proof. 
-  intros l.
-  induction l as [| h tl IHl ].
-  - simpl. reflexivity.
-  - destruct h. 
-    +  simpl. apply IHl.
-    +  simpl. apply IHl.
-Qed.
 
 End NatList.
 
